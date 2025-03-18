@@ -119,7 +119,7 @@ export default defineConfig({
   
     themeConfig: {
         socialLinks: [
-            { icon: 'github', link: 'https://github.com/rsmlang' },
+            { icon: 'github', link: 'https://github.com/rbx-rsml' },
         ],
         sidebar: [
             {
