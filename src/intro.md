@@ -1,129 +1,171 @@
 # Introduction
 
-Rsml (Roblox Styling Markup Language) is a declarative styling language for the roblox ecosystem which is designed to be transpiled to instances that inherit from [StyleBase](https://create.roblox.com/docs/reference/engine/classes/StyleBase).
+RSML (Roblox Style Markup Language) is a declarative language for defining styles.
 
-To enable the Roblox StyleSheet's feature you will need to set the following fflags:
-```json
-{
-	// Enables styling everywhere.
-	"FFlagEnableStylingEverywhere": "true",
-
-	// Enables the Style Editor plugin.
-	"FFlagEnableStyleEditor": "true",
-
-	// This changes how the EditTree Component works, and it’s required in order for the Style Editor plugin to work.
-	"FFlagDevFrameworkEditTreeItemIdSupport": "true",
-	
-	// Required so you can use `:ResetPropertyToDefault()` and `:IsPropertyModified()`.
-	"FFlagEnableModifiedPropertyLuaApis": "true"
-
-}
-```
-
-
-
-
-
-## Why Use Rsml?
-Unlike Roblox's Style instances, Rsml can be stored in local file systems which means it can be used in workflows involving version control. Developers who would prefer to write styles instead of relying on a visual based solution would benefit as well.
-
-
-
-
-
-## Installation
-Currently The only way to use Rsml is via a forked Rojo server and plugin found here: https://github.com/rsmlang/rojo-rsml.
-Rsml also has a vs code extension which provides syntax highlighting to .rsml files: https://github.com/rsmlang/rsml-vsc-ext.
-
-
-
-
-
-## Example
+### Example
 
 ::: code-group
-```rsml:line-numbers [./Styles.rsml]
-@derive "./Globals.rsml";
-@derive "./Macros.rsml";
+```rsml [./button.rsml]
+@derive "attributes";
 
-TextButton {
-	Size = udim2 (15px + 1%, 2% - 20px);
-	AutomaticSize = :XY;
-	BackgroundColor3 = $ColorAccent;
-	TextColor3 = $ColorTextTitle;
-	!HorizontalPadding = 14px;
-	!VerticalPadding = 10px;
-	!CornerRadius = 100px
-}
-```
+.Button {
+    @priority 50;
+    AutomaticSize = :XY;
+    TextColor3 = $ColorText;
+    FontFace = $FontFace;
+    TextSize = $TextSize;
 
-```rsml:line-numbers [./Globals.rsml]
-$ColorAccent = #005AC5;
-$ColorTextTitle = tw:slate:50;
-$Font = font (16658221428, "SemiBold");
-$TextSize = 14;
-
-TextButton {
-	TextSize = $TextSize;
-	FontFace = $Font
-}
-
-TextLabel {
-	TextSize = $TextSize;
-	FontFace = $Font
-}
-
-TextBox {
-	TextSize = $TextSize;
-	FontFace = $Font
-}
-```
-
-```rsml:line-numbers [./Macros.rsml]
-@macro HorizontalPadding (padding: udim = 0px) {
-    ::UIPadding {
-        PaddingLeft = $!padding;
-        PaddingRight = $!padding
+    .Primary {
+        BackgroundColor3 = $ColorPrimary;
     }
-}
 
-@macro VerticalPadding (padding: udim = 0px) {
-    ::UIPadding {
-        PaddingTop = $!padding;
-        PaddingBottom = $!padding
+    .Secondary {
+        BackgroundColor3 = $ColorSecondary;
     }
-}
 
-@macro CornerRadius (padding: udim = 0px) {
+    .Destructive {
+        BackgroundColor3 = $ColorDestructive;
+    }
+
+    .Disabled {
+        BackgroundTransparency = .4;
+        Interactable = false;
+    }
+
+    ::UIPadding {
+        PaddingLeft = 10px;
+        PaddingRight = 10px;
+        PaddingTop = 10px;
+        PaddingBottom = 10px;
+    }
+
     ::UICorner {
-        CornerRadius = $!padding
+        CornerRadius = 10px;
+        CornerRadius = 50px;
     }
 }
 ```
 
-```luau:line-numbers [./Main.luau]
-local Styles = require(script.Parent.Styles);
-
-local Gui = Instance.new("ScreenGui");
-Gui.Parent = game:GetService("Players").LocalPlayer.PlayerGui;
-
-local Btn = Instance.new("TextButton");
-Btn.Parent = Gui;
-
-local Link = Instance.new("StyleLink");
-Link.StyleSheet = Styles;
-Link.Parent = Gui;
+```rsml [./attributes.rsml]
+$FontFace = font ("BuilderSans", "SemiBold");
+$TextSize = 14;
+$ColorText = tw:slate:50;
+$ColorPrimary = tw:blue:700;
+$ColorSecondary = tw:slate:700;
+$ColorDestructive = tw:rose:700;
 ```
 :::
 
 
+## Integrations
 
 
+### RSML Luau
+A package designed to convert stringified rsml inside `.luau` and `.ts` files into Instances in the DataModel at runtime. Also exposes a lexer and parser.<br></br>
+<ul style="list-style-type: none; padding: 0; margin: 0; margin-top: -5px; display: flex; gap: 20px; flex-wrap: wrap;">
+    <a href="/integrations/luau" target="_blank">
+        <li style="display: flex; gap: 10px; justify-content: center;">
+            <img src="/logo.svg" width="20px" />
+            Documentation
+        </li>
+    </a>
+    <a href="https://github.com/rbx-rsml/rsml-luau" target="_blank">
+        <li style="display: flex; gap: 10px; justify-content: center;">
+            <img src="/github-dark.svg" width="20px" />
+            Github Repo
+        </li>
+    </a>
+    <a href="https://wally.run/package/cameronpcampbell/rsml" target="_blank">
+        <li style="display: flex; gap: 10px; justify-content: center;">
+            <img src="/wally.svg" width="20px" />
+            Wally Package
+        </li>
+    </a>
+    <a href="https://www.npmjs.com/package/@rbxts/rsml" target="_blank">
+        <li style="display: flex; gap: 10px; justify-content: center;">
+            <img src="/npm.svg" width="20px" />
+            NPM Package
+        </li>
+    </a>
+</ul>
 
-## Sourcemaps
+### RSML Rojo
+A Rojo fork which converts `.rsml` files to Roblox instances in the DataModel.
+<br></br>
+<ul style="list-style-type: none; padding: 0; margin: 0; margin-top: -5px; display: flex; gap: 20px; flex-wrap: wrap;">
+    <a href="/integrations/rojo" target="_blank">
+        <li style="display: flex; gap: 10px; justify-content: center;">
+            <img src="/logo.svg" width="20px" />
+            Documentation
+        </li>
+    </a>
+    <a href="https://github.com/rbx-rsml/rojo" target="_blank">
+        <li style="display: flex; gap: 10px; justify-content: center;">
+            <img src="/github-dark.svg" width="20px" />
+            Github Repo
+        </li>
+    </a>
+</ul>
 
-By default Rojo omits all non-scripts from sourcemaps, so you will need to use the `--include-non-scripts` argument so that StyleSheet, StyleRule and StyleDerive Instances are included:
+### RSML CLI
+A codegen CLI which converts `.rsml` files to `.luau` files in the local file system.
+<br></br>
+<ul style="list-style-type: none; padding: 0; margin: 0; margin-top: -5px; display: flex; gap: 20px; flex-wrap: wrap;">
+    <a href="/integrations/cli" target="_blank">
+        <li style="display: flex; gap: 10px; justify-content: center;">
+            <img src="/logo.svg" width="20px" />
+            Documentation
+        </li>
+    </a>
+    <a href="https://github.com/rbx-rsml/rsml-cli" target="_blank">
+        <li style="display: flex; gap: 10px; justify-content: center;">
+            <img src="/github-dark.svg" width="20px" />
+            Github Repo
+        </li>
+    </a>
+</ul>
 
-```
-rojo sourcemap --include-non-scripts
-```
+### RSML Rust
+A crate designed for lexing and parsing RSML.
+<br></br>
+<ul style="list-style-type: none; padding: 0; margin: 0; margin-top: -5px; display: flex; gap: 20px; flex-wrap: wrap;">
+    <a href="/integrations/rust" target="_blank">
+        <li style="display: flex; gap: 10px; justify-content: center;">
+            <img src="/logo.svg" width="20px" />
+            Documentation
+        </li>
+    </a>
+    <a href="https://github.com/rbx-rsml/rsml-rust" target="_blank">
+        <li style="display: flex; gap: 10px; justify-content: center;">
+            <img src="/github-dark.svg" width="20px" />
+            Github Repo
+        </li>
+    </a>
+    <a href="https://docs.rs/rbx-rsml/latest/rbx_rsml" target="_blank">
+        <li style="display: flex; gap: 10px; justify-content: center;">
+            <img src="/crates-io.png" width="20px" />
+            Crates.io
+        </li>
+    </a>
+</ul>
+
+## IDE Support
+
+### VS Code Extension
+
+Adds syntax highlighting to `.rsml` files. Also adds highlighting to luau and typscript strings prefixed with the `--!rsml` (or `--[=*[rsml!]=*]`) sigil.
+<br></br>
+<ul style="list-style-type: none; padding: 0; margin: 0; margin-top: -5px; display: flex; gap: 20px; flex-wrap: wrap;">
+    <a href="https://github.com/rbx-rsml/rsml-vsc" target="_blank">
+        <li style="display: flex; gap: 10px; justify-content: center;">
+            <img src="/github-dark.svg" width="20px" />
+            Github Repo
+        </li>
+    </a>
+    <a href="https://marketplace.visualstudio.com/items?itemName=rbx-rsml.roblox-style-markup-language" target="_blank">
+        <li style="display: flex; gap: 10px; justify-content: center;">
+            <img src="/vs-dark.svg" width="20px" />
+            VS Marketplace
+        </li>
+    </a>
+</ul>

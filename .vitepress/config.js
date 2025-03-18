@@ -1,17 +1,44 @@
-const hljs = require("highlight.js");
-const fs = require("fs");
+import * as fs from "fs"
+import { defineConfig } from 'vitepress'
 
-export default {
+export default defineConfig({
     // site-level options
     title: 'Rsml',
     description: 'a declarative styling language for the Roblox ecosystem.',
     srcDir: './src',
     cleanUrls: true,
 
+    head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
+
     markdown: {
         languages: [
-            JSON.parse(fs.readFileSync('./rsml.tmLanguage.json', 'utf8')),
-            JSON.parse(fs.readFileSync('./luau.tmLanguage.json', 'utf8'))
+            {   
+                ...JSON.parse(fs.readFileSync('./syntaxes/rsml.tmLanguage.json', 'utf8'))
+            },
+
+            {
+                ...JSON.parse(fs.readFileSync('./syntaxes/luau.tmLanguage.json', 'utf8'))
+            },
+
+            {
+                injectTo: ["source.luau"],
+                embeddedLanguages: {
+                    ["meta.embedded.rsml"]: "rsml"
+                },
+                ...JSON.parse(fs.readFileSync('./syntaxes/rsml-luau.tmLanguage.json', 'utf8'))
+            },
+
+            {
+                ...JSON.parse(fs.readFileSync('./syntaxes/ts.tmLanguage.json', 'utf8'))
+            },
+
+            {   
+                injectTo: ["source.ts"],
+                embeddedLanguages: {
+                    ["meta.embedded.rsml"]: "rsml"
+                },
+                ...JSON.parse(fs.readFileSync('./syntaxes/rsml-ts.tmLanguage.json', 'utf8'))
+            }
         ],
         theme: {
             "name": "VSCode Dark",
@@ -74,7 +101,7 @@ export default {
 
 
                 {
-                    "scope": ["support.function", "entity.name.function.luau"],
+                    "scope": ["support.function", "entity.name.function"],
                     "settings": {
                         "foreground": "#D8D7A3"
                     }
@@ -104,14 +131,14 @@ export default {
             {
                 text: "Docs",
                 items: [
+                    { text: "Derives", link: "docs/derives" },
+                    { text: "Names", link: "docs/names" },
+                    { text: "Priorities", link: "docs/priorities" },
                     { text: "Selectors", link: "docs/selectors" },
                     { text: "Fields", link: "docs/fields" },
-                    { text: "Data Types", link: "docs/data-types" },
-                    { text: "Priorities", link: "docs/priorities" },
-                    { text: "Derives", link: "docs/derives" },
-                    { text: "Macros", link: "docs/macros" }
+                    { text: "Datatypes", link: "docs/datatypes" },
                 ]
             }
         ]
     },
-}
+})

@@ -1,15 +1,15 @@
 # Derives
 
-> [!CAUTION] 🚧 Under Construction
-> Deriving is not available yet.
+- Deriving allows you to import the rules from one StyleSheet into another.
+- They can only be defined at the root level of the StyleSheet (not inside rules).
 
-
-You are able to use another style sheet as a base for the current style sheet via a derive declaration:
+They can be written as follows:
 
 ```rsml
 @derive "./path/to/style/sheet/here"
 ```
 
-This declaration imports all variables, rules and macros from the style sheet defined at the path into the current style sheet.
+- - -
 
-The inclusion of the `.rsml` file extension at the end of the path is optional.
+Deriving works slightly differently depending on which integration you are using.
+Integrations that rely on `.rsml` files will likely use paths for the local filesystem, whilst integrations which use stringified rsml embedded inside programming languages will likely use paths for the Roblox DataModel.

@@ -1,0 +1,136 @@
+{
+    "scopeName": "rsml.ts",
+    "injectionSelector": "L:source.ts - comment - string",
+    "patterns": [
+        {
+            "include": "#string"
+        }
+    ],
+    "repository": {
+        "string": {
+            "patterns": [
+                {
+                    "contentName": "meta.embedded.rsml",
+                    "begin": "`[\t ]*(--!rsml|--\\[(=*)\\[[\t ]*!rsml[\t ]*\\](\\2)\\])",
+                    "end": "`",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "string.template.ts punctuation.definition.string.template.start.ts"
+                        },
+                        "1": {
+                            "name": "comment"
+                        }
+                    },
+                    "endCaptures": {
+                        "0": {
+                            "name": "string.template.ts punctuation.definition.string.template.end.ts"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "source.ts#template-substitution-element"
+                        },
+                        {
+                            "include": "source.ts#string-character-escape"
+                        },
+                        {
+                            "include": "source.rsml"
+                        }
+                    ]
+                },
+                {
+                    "contentName": "meta.embedded.rsml",
+                    "begin": "(?i)(rsml)[ \t]*(\\(?)[ \t]*(`)",
+                    "end": "`",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "entity.name.function.ts"
+                        },
+                        "2": {
+                            "name": "entity.name.function.ts"
+                        },
+                        "3": {
+                            "name": "string.template.ts punctuation.definition.string.template.start.ts"
+                        }
+                    },
+                    "endCaptures": {
+                        "0": {
+                            "name": "string.template.ts punctuation.definition.string.template.end.ts"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "source.ts#template-substitution-element"
+                        },
+                        {
+                            "include": "source.ts#string-character-escape"
+                        },
+                        {
+                            "include": "source.rsml"
+                        }
+                    ]
+                },
+
+                {
+                    "contentName": "meta.embedded.rsml",
+                    "begin": "(\"|')[\t ]*(--!rsml|--\\[(=*)\\[[\t ]*!rsml[\t ]*\\](\\3)\\])",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "string.quoted.ts punctuation.definition.string.begin.ts"
+                        },
+                        "2": {
+                            "name": "comment"
+                        }
+                    },
+                    "end": "(\\1)|((?:[^\\\\\\n])$)",
+                    "endCaptures": {
+                        "1": {
+                            "name": "string.quoted.double.ts punctuation.definition.string.end.ts"
+                        },
+                        "2": {
+                            "name": "invalid.illegal.newline.ts"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "#string-character-escape"
+                        },
+                        {
+                            "include": "source.rsml"
+                        }
+                    ]
+                },
+                {
+                    "contentName": "meta.embedded.rsml",
+                    "begin": "(?i)(rsml)[ \t]*(\\(?)[ \t]*(\"|')",
+                    "end": "(\\3)|((?:[^\\\\\\n])$)",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "entity.name.function.ts"
+                        },
+                        "2": {
+                            "name": "entity.name.function.ts"
+                        },
+                        "3": {
+                            "name": "string.template.ts punctuation.definition.string.template.start.ts"
+                        }
+                    },
+                    "endCaptures": {
+                        "0": {
+                            "name": "string.template.ts punctuation.definition.string.template.end.ts"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "#string-character-escape"
+                        },
+                        {
+                            "include": "source.rsml"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+  

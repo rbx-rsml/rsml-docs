@@ -1,0 +1,190 @@
+{
+    "scopeName": "rsml.luau",
+    "injectionSelector": "L:source.luau - comment - string",
+    "patterns": [
+        {
+            "include": "#string"
+        },
+        {
+            "match": "5824",
+            "name": "string"
+        }
+    ],
+    "repository": {
+        "string": {
+            "patterns": [
+                {
+                    "name": "meta.embedded.rsml",
+                    "begin": "\\[(=*)\\[[\t ]*(--!rsml|--\\[(=*)\\[[\t ]*!rsml[\t ]*\\](\\3)\\])",
+                    "end": "\\]\\1\\]",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "string.other.multiline.luau"
+                        },
+                        "2": {
+                            "name": "comment"
+                        }
+                    },
+                    "endCaptures": {
+                        "0": {
+                            "name": "string.other.multiline.luau"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "source.luau#string_escape"
+                        },
+                        {
+                            "include": "source.rsml"
+                        }
+                    ]
+                },
+                {
+                    "contentName": "meta.embedded.rsml",
+                    "begin": "(?i)(rsml)[ \t]*(\\(?)[ \t]*(\\[(=*)\\[)",
+                    "end": "\\]\\4\\]",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "entity.name.function.luau"
+                        },
+                        "2": {
+                            "name": "punctuation.arguments.begin.luau source.luau"
+                        },
+                        "3": {
+                            "name": "string.other.multiline.luau"
+                        }
+                    },
+                    "endCaptures": {
+                        "0": {
+                            "name": "string.other.multiline.luau"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "source.luau#string_escape"
+                        },
+                        {
+                            "include": "source.rsml"
+                        }
+                    ]
+                },
+
+                {
+                    "name": "meta.embedded.rsml",
+                    "begin": "`[\t ]*(--!rsml|--\\[(=*)\\[[\t ]*!rsml[\t ]*\\](\\2)\\])",
+                    "end": "`",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "string.other.multiline.luau"
+                        },
+                        "1": {
+                            "name": "comment"
+                        }
+                    },
+                    "endCaptures": {
+                        "0": {
+                            "name": "string.other.multiline.luau"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "source.luau#string_escape"
+                        },
+                        {
+                            "include": "source.luau#interpolated_string_expression"
+                        },
+                        {
+                            "include": "source.rsml"
+                        }
+                    ]
+                },
+                {
+                    "contentName": "meta.embedded.rsml",
+                    "begin": "(?i)(rsml)[ \t]*(\\(?)[ \t]*(`)",
+                    "end": "`",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "entity.name.function.luau"
+                        },
+                        "2": {
+                            "name": "punctuation.arguments.begin.luau source.luau"
+                        },
+                        "3": {
+                            "name": "string.other.multiline.luau"
+                        }
+                    },
+                    "endCaptures": {
+                        "0": {
+                            "name": "string.other.multiline.luau"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "source.luau#string_escape"
+                        },
+                        {
+                            "include": "source.rsml"
+                        }
+                    ]
+                },
+
+                {
+                    "name": "meta.embedded.rsml",
+                    "begin": "(\"|')[\t ]*(--!rsml|--\\[(=*)\\[[\t ]*!rsml[\t ]*\\](\\3)\\])",
+                    "end": "\\1",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "string.other.multiline.luau"
+                        },
+                        "2": {
+                            "name": "comment"
+                        }
+                    },
+                    "endCaptures": {
+                        "0": {
+                            "name": "string.other.multiline.luau"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "source.luau#string_escape"
+                        },
+                        {
+                            "include": "source.rsml"
+                        }
+                    ]
+                },
+                {
+                    "contentName": "meta.embedded.rsml",
+                    "begin": "(?i)(rsml)[ \t]*(\\(?)[ \t]*(\"|')",
+                    "end": "\\3",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "entity.name.function.luau"
+                        },
+                        "2": {
+                            "name": "punctuation.arguments.begin.luau source.luau"
+                        },
+                        "3": {
+                            "name": "string.other.multiline.luau"
+                        }
+                    },
+                    "endCaptures": {
+                        "0": {
+                            "name": "string.other.multiline.luau"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "source.luau#string_escape"
+                        },
+                        {
+                            "include": "source.rsml"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+  

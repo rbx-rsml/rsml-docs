@@ -5,10 +5,7 @@ layout: home
 hero:
   name: "RSML"
   text: "Roblox Styling Markup Language"
-  tagline: A declarative styling language for the Roblox ecosystem.
-  image:
-    src: /logo.svg
-    alt: RsmlLogo
+  tagline: a declarative styling language for the Roblox ecosystem.
   actions:
     - theme: brand
       text: ->  Get Started
@@ -22,7 +19,8 @@ features:
   - title: Declarative
     details: Extremely simple and declarative syntax which lets you focus on the things that matter.
   - title: Version Control
-    details: RSML files can be saved to local filesystems and therefore can be used in workflows involving version control.
+    details: Rsml files can be saved to local filesystems and therefore can be used in workflows involving version control.
   - title: Rojo Support
-    details: Enjoy a seemless developer experience with the Rojo Integration.
+    details: Built from the ground up to support Rojo for a seemless developer experience.
 ---
+
