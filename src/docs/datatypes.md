@@ -109,15 +109,11 @@ color3 (brickcolor ("Really red"));
 ```
 
 ## Content
-Content can be written via the `content` annotated tuple, or if your content is an rbxassetid then you can use the `contentid://{number}` syntax.
+Content can be written via the `content` annotated tuple:
 ```rsml
 content (rbxasset://1234567890)
 ```
-```rsml
-contentid://1234567890
-```
 ​
-
 - - -
 ### Annotated Tuples
 Below is documentation for annotated tuples which do not fit into the sub-sections above.
