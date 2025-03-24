@@ -2,12 +2,13 @@
 Values that can be assigned to properties and attributes.
 
 ## Mathematical Operations
-The following operators can be used between datatypes: `^` (raise to power), `/` (divide), `%` (modulus), `*` (multiply), `+` (addition), `-` (subtraction).
+The following operators can be used between datatypes: `^` (raise to power), `/` (divide), `//` (floor divide), `%` (modulus), `*` (multiply), `+` (add), `-` (subtract).
 
 ## UDim Shorthands
-- A UDim with only a scale component can be defined by prefixing a number with `%`.
-- A UDim with only an offset component can be defined by prefixing a number with `px`.
+- A UDim with only a scale component can be defined by suffixing a number with `%`.
+- A UDim with only an offset component can be defined by suffixing a number with `px`.
 - You can perform mathematical operations between both shorthands (for example `50% + 125px`).
+- A number used in an operation with a udim shorthand will be coerced into a udim scale component.
 
 ## Tuples
 A tuple is a grouping of other data types. They are defined by wrapping a comma separated list in parenthesis:
@@ -21,7 +22,7 @@ udim2 (50% + 25px, 13px + 12%)
 ```
 
 ## Strings
-Strings can be written via surrounding text in single or double quotes, double square brackets or backticks.
+Strings can be written via surrounding text in single or double quotes or double square brackets.
 
 ::: code-group
 ```rsml [Single Quotes]
@@ -37,11 +38,6 @@ SomeProperty = [[
     hello world
 ]]
 ```
-
-```rsml [Backticks]
-SomeProperty = `hello world`
--- Please note that interpolation does not work for backtick strings.
-```
 :::
 
 
@@ -49,26 +45,27 @@ SomeProperty = `hello world`
 ## Colors
 
 ### Hex Colors
-You can easily add hex codes into your style sheets via a `#` prefix:
+You can easily add hex codes into your style sheets via a `#` prefix.
 ```rsml
 #C586C0;
 ```
 
 ### Tailwind Colors
-[Tailwind colors](https://tailwindcss.com/docs/customizing-colors) can be written via the `tw:{name}:{shade?}` syntax:
+[Tailwind colors](https://tailwindcss.com/docs/customizing-colors) can be written via the `tw:{name}:{shade?}` (case-insensitive) syntax which resolves to a Color3.
 ```rsml
 tw:fuchsia:200;
 tw:fuchsia;
 ```
 
 ### Css Colors
-Css colors can be written via the `css:{name}` syntax:
+Css colors can be written via the `css:{name}` (case-insensitive) syntax which resolves to a Color3.
 ```rsml
 css:rebeccapurple;
 ```
 
 ### Brick Colors
-Brick colors can be written via the `bc:{name}` syntax or the `brickcolor` annotated tuple:
+You can write Brick Colors using the `bc:{name}` (case-insensitive) syntax which resolves to a Color3, or alternatively you can use the `brickcolor` annotated tuple which resolves to a BrickColor.
+
 ```rsml
 bc:reallyred;
 ```
@@ -81,7 +78,7 @@ brickcolor ("Really red");
 ```
 
 ### RGB Colors
-Rgb colors can be written via the `rgb` annotated tuple:
+Rgb colors can be written via the `rgb` annotated tuple.
 ```rsml
 rgb (
     r: number,
@@ -93,7 +90,7 @@ rgb (255, 82, 24);
 ```
 
 ### Color3
-Color3's can be written via the `color3` annotated tuple:
+Color3's can be written via the `color3` annotated tuple.
 ```rsml
 color3 (
     r: number,
@@ -102,6 +99,13 @@ color3 (
 );
 -- Example.
 color3 (.8, .1, .3);
+```
+```rsml
+color3 (
+    brickColor: BrickColor
+);
+-- Example.
+color3 (brickcolor ("Really red"));
 ```
 
 ## Content
