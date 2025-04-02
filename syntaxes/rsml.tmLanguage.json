@@ -34,6 +34,9 @@
 				},
 				{
 					"include": "#booleans"
+				},
+				{
+					"include": "#nil"
 				}
 			]
 		},
@@ -186,7 +189,7 @@
 		},
 
 		"tuples": {
-			"begin": "([a-zA-Z0-9]+)[ \t]*\\(",
+			"begin": "([a-zA-Z0-9]+)?[ \t]*\\(",
 			"end": "\\)",
 			"beginCaptures": {
 				"1": {
@@ -211,6 +214,15 @@
 				},
 				{
 					"match": "false",
+					"name": "variable.other.constant"
+				}
+			]
+		},
+
+		"nil": {
+			"patterns": [
+				{
+					"match": "nil",
 					"name": "variable.other.constant"
 				}
 			]

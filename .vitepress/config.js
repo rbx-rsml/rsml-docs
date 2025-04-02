@@ -137,6 +137,7 @@ export default defineConfig({
                     { text: "Selectors", link: "docs/selectors" },
                     { text: "Fields", link: "docs/fields" },
                     { text: "Datatypes", link: "docs/datatypes" },
+                    { text: "Comments", link: "docs/comments" },
                 ]
             }
         ]
