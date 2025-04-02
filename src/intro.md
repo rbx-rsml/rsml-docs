@@ -1,6 +1,6 @@
 # Introduction
 
-RSML (Roblox Style Markup Language) is a declarative language for defining styles.
+RSML (Roblox Style Management Language) is a declarative language for defining styles.
 
 ### Example
 

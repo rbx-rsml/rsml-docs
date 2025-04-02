@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "RSML"
-  text: "Roblox Styling Markup Language"
+  text: "Roblox Style Management Language"
   tagline: A declarative styling language for the Roblox ecosystem.
   image:
     src: /logo.svg
