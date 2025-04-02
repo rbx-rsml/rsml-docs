@@ -162,7 +162,7 @@ Adds syntax highlighting to `.rsml` files. Also adds highlighting to luau and ty
             Github Repo
         </li>
     </a>
-    <a href="https://marketplace.visualstudio.com/items?itemName=rbx-rsml.roblox-style-markup-language" target="_blank">
+    <a href="https://marketplace.visualstudio.com/items?itemName=rbx-rsml.roblox-style-management-language" target="_blank">
         <li style="display: flex; gap: 10px; justify-content: center;">
             <img src="/vs-dark.svg" width="20px" />
             VS Marketplace
