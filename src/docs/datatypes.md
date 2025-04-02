@@ -74,7 +74,7 @@ SomeProperty = [[
 :::
 
 
-## Booleans & Nil.
+## Booleans & Nil
 - Booleans can be defined via `true` and `false`.
 - Nil can be defined via `nil`.
 
