@@ -51,7 +51,8 @@ To improve the developer experience, some property names are hardcoded to be inf
 | Property Name | Inferred As | 
 | ------------- | ----------- |
 | FlexMode | UIFlexMode |
-| FlexAlignment | UIFlexAlignment |
+| HorizontalFlex | UIFlexAlignment |
+| VerticalFlex | UIFlexAlignment |
 
 
 ## Strings
