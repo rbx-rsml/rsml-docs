@@ -122,7 +122,7 @@ The RSML Rojo fork currently uses an extremely outdated version of RSML and ther
 A codegen CLI which converts `.rsml` files to `.luau` files in the local file system.
 
 ::: warning
-The RSML CLI is very barebones atm and only supports convering a .rsml file into a .luau file.
+The RSML CLI is very barebones at the moment and only supports convering a .rsml file into a .luau file.
 :::
 
 <br></br>
