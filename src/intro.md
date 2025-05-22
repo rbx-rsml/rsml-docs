@@ -61,7 +61,13 @@ $ColorDestructive = tw:rose:700;
 
 
 ### RSML Luau
-A package designed to convert stringified rsml inside `.luau` and `.ts` files into Instances in the DataModel at runtime. Also exposes a lexer and parser.<br></br>
+A package designed to convert stringified rsml inside `.luau` and `.ts` files into Instances in the DataModel at runtime. Also exposes a lexer and parser.
+
+::: warning
+The RSML Luau version currently uses a slightly outdated version of RSML (it does not have macros, oklab and oklch color spaces, skin color codes, or static attributes).
+:::
+
+<br></br>
 <ul style="list-style-type: none; padding: 0; margin: 0; margin-top: -5px; display: flex; gap: 20px; flex-wrap: wrap;">
     <a href="/integrations/luau" target="_blank">
         <li style="display: flex; gap: 10px; justify-content: center;">
@@ -91,6 +97,11 @@ A package designed to convert stringified rsml inside `.luau` and `.ts` files in
 
 ### RSML Rojo
 A Rojo fork which converts `.rsml` files to Roblox instances in the DataModel.
+
+::: warning
+The RSML Rojo fork currently uses an extremely outdated version of RSML and there is a lot of discrepencies between it and docs.
+:::
+
 <br></br>
 <ul style="list-style-type: none; padding: 0; margin: 0; margin-top: -5px; display: flex; gap: 20px; flex-wrap: wrap;">
     <a href="/integrations/rojo" target="_blank">
@@ -109,6 +120,11 @@ A Rojo fork which converts `.rsml` files to Roblox instances in the DataModel.
 
 ### RSML CLI
 A codegen CLI which converts `.rsml` files to `.luau` files in the local file system.
+
+::: warning
+The RSML CLI is very barebones atm and only supports convering a .rsml file into a .luau file.
+:::
+
 <br></br>
 <ul style="list-style-type: none; padding: 0; margin: 0; margin-top: -5px; display: flex; gap: 20px; flex-wrap: wrap;">
     <a href="/integrations/cli" target="_blank">
@@ -156,7 +172,7 @@ A crate designed for lexing and parsing RSML.
 Adds syntax highlighting to `.rsml` files. Also adds highlighting to luau and typscript strings prefixed with the `--!rsml` (or `--[=*[rsml!]=*]`) sigil.
 <br></br>
 <ul style="list-style-type: none; padding: 0; margin: 0; margin-top: -5px; display: flex; gap: 20px; flex-wrap: wrap;">
-    <a href="https://github.com/rbx-rsml/rsml-vsc" target="_blank">
+    <a href="https://github.com/rbx-rsml/rsml-vsc-ext" target="_blank">
         <li style="display: flex; gap: 10px; justify-content: center;">
             <img src="/github-dark.svg" width="20px" />
             Github Repo
