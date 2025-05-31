@@ -114,6 +114,7 @@ export default defineConfig({
     },
   
     themeConfig: {
+        outline: [ 1, 3 ],
         socialLinks: [
             { icon: 'github', link: 'https://github.com/rbx-rsml' },
             { icon: 'discord', link: 'https://discord.gg/67CWCwNT6R' },
@@ -133,7 +134,7 @@ export default defineConfig({
                     { text: "Derives", link: "docs/derives" },
                     { text: "Names", link: "docs/names" },
                     { text: "Priorities", link: "docs/priorities" },
-                    { text: "Datatypes", link: "docs/datatypes" },
+                    { text: "Data Types", link: "docs/data types" },
                     { text: "Macros", link: "docs/macros" },
                     { text: "Comments", link: "docs/comments" },
                 ]

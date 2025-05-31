@@ -1,9 +1,11 @@
-# Datatypes
+# Data Types
 Values that can be assigned to properties and attributes.
 
 ## Mathematical Operations
-The following operators can be used between datatypes: `^` (raise to power), `/` (divide), `//` (floor divide), `%` (modulus), `*` (multiply), `+` (add), `-` (subtract).
+The following operators can be used between data types: `^` (raise to power), `/` (divide), `//` (floor divide), `%` (modulus), `*` (multiply), `+` (add), `-` (subtract).
 
+## Intermediate Data Types
+Some data types which RSML offers are not natively supported in Roblox. These data types are referred to as being intermediate. When you assign them to a property or a token then they will be converted into another data type which Roblox natively supports.
 
 ## UDim Shorthands
 - A UDim with only a scale component can be defined by suffixing a number with `%`.
@@ -179,10 +181,6 @@ Content can be written via the `content` annotated tuple:
 ```rsml-types
 content (rbxasset://1234567890)
 ```
-​
-- - -
-### Misc Annotated Tuples
-Below is documentation for annotated tuples which do not fit into the sub-sections above.
 
 ## UDim
 ```rsml-types
@@ -351,4 +349,63 @@ numrange (
 )
 -- Example.
 numrange (0, 5)
+```
+
+- - - 
+
+# Data Type Modifiers
+
+Modifiers are tuple annotations which outputs a modified version of the inputted datatype(s).
+
+
+## Lerp
+```
+lerp <T>(
+    from: T,
+    to: T,
+    time: number
+) -> T
+```
+
+
+## Lerp
+```
+lerp <T>(
+    from: T,
+    to: T,
+    time: number
+) -> T
+```
+
+## Floor
+Rounds down all the numerical components of a datatype.
+```
+floor <T>(
+    datatype: T
+) -> T
+```
+
+## Ceil
+Rounds up all the numerical components of a datatype.
+```
+ceil <T>(
+    datatype: T
+) -> T
+```
+
+## Round
+Rounds all the numerical components of a datatype.
+```
+round <T>(
+    datatype: T
+) -> T
+```
+
+
+## Abs
+Converts all the numerical components of a datatype to be positive.
+```
+abs <T>(
+    datatype: T
+) -> T
 ```
