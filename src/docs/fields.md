@@ -27,7 +27,7 @@ $MyToken = ...
 
 
 ## Static Tokens
-`Static Tokens` are like `Tokens` except they are resolved during compilation. This means their value can't be changed dynamically during runtime. Unlike regular tokens mathematical operations can be performed on them and [intermediate data types]() can be assigned to them.
+`Static Tokens` are like `Tokens` except they are resolved during compilation. This means their value can't be changed dynamically during runtime. Unlike regular tokens mathematical operations can be performed on them and intermediate data types can be assigned to them.
 
 They are written with a `$!` prefix as follows:
 ```rsml
