@@ -8,7 +8,7 @@ Selectors are used to define which instances a rule is responsible for styling:
 | Name Selector | `#` | Styles instances which have a specific name. |
 | Tag Selector | `.` | Styles instances which have a specific tag. |
 | State Selector | `:` | Styles instances which have a specific state active (e.g. hover). |
-| Psuedo Selector | `::` | Creates a new instance of a specific class. |
+| Pseudo Selector | `::` | Creates a new instance of a specific class. |
 
 
 
