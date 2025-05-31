@@ -1,12 +1,12 @@
 # Introduction
 
-RSML (Roblox Style Management Language) is a declarative language for defining styles.
+RSML (Roblox Style Management Language) is a declarative language for defining Roblox StyleSheet's.
 
 ### Example
 
 ::: code-group
 ```rsml [./button.rsml]
-@derive "attributes";
+@derive "base";
 
 .Button {
     @priority 50;
@@ -14,6 +14,8 @@ RSML (Roblox Style Management Language) is a declarative language for defining s
     TextColor3 = $ColorText;
     FontFace = $FontFace;
     TextSize = $TextSize;
+    CornerRadius! (15px);
+    Padding! (25px);
 
     .Primary {
         BackgroundColor3 = $ColorPrimary;
@@ -31,23 +33,11 @@ RSML (Roblox Style Management Language) is a declarative language for defining s
         BackgroundTransparency = .4;
         Interactable = false;
     }
-
-    ::UIPadding {
-        PaddingLeft = 10px;
-        PaddingRight = 10px;
-        PaddingTop = 10px;
-        PaddingBottom = 10px;
-    }
-
-    ::UICorner {
-        CornerRadius = 10px;
-        CornerRadius = 50px;
-    }
 }
 ```
 
-```rsml [./attributes.rsml]
-$FontFace = font ("BuilderSans", "SemiBold");
+```rsml [./base.rsml]
+$FontFace = font ("BuilderSans", :SemiBold);
 $TextSize = 14;
 $ColorText = tw:slate:50;
 $ColorPrimary = tw:blue:700;
@@ -60,21 +50,32 @@ $ColorDestructive = tw:rose:700;
 ## Integrations
 
 
-### RSML Luau
-A package designed to convert stringified rsml inside `.luau` and `.ts` files into Instances in the DataModel at runtime. Also exposes a lexer and parser.
-
-::: warning
-The RSML Luau version currently uses a slightly outdated version of RSML (it does not have macros, oklab and oklch color spaces, skin color codes, or static attributes).
-:::
-
+### RSML CLI
+A codegen CLI which converts `.rsml` files to `.model.json` files in the local file system.
 <br></br>
 <ul style="list-style-type: none; padding: 0; margin: 0; margin-top: -5px; display: flex; gap: 20px; flex-wrap: wrap;">
-    <a href="/integrations/luau" target="_blank">
+    <a href="https://github.com/rbx-rsml/rsml-cli/releases/tag/v0.0.0" target="_blank">
         <li style="display: flex; gap: 10px; justify-content: center;">
             <img src="/logo.svg" width="20px" />
             Documentation
         </li>
     </a>
+    <a href="https://github.com/rbx-rsml/rsml-cli" target="_blank">
+        <li style="display: flex; gap: 10px; justify-content: center;">
+            <img src="/github-dark.svg" width="20px" />
+            Github Repo
+        </li>
+    </a>
+</ul>
+
+
+- - -
+
+
+### RSML Luau
+A package designed to convert stringified rsml inside `.luau` and `.ts` files into Instances in the DataModel at runtime. Also exposes a lexer and parser.
+<br></br>
+<ul style="list-style-type: none; padding: 0; margin: 0; margin-top: -5px; display: flex; gap: 20px; flex-wrap: wrap;">
     <a href="https://github.com/rbx-rsml/rsml-luau" target="_blank">
         <li style="display: flex; gap: 10px; justify-content: center;">
             <img src="/github-dark.svg" width="20px" />
@@ -95,21 +96,18 @@ The RSML Luau version currently uses a slightly outdated version of RSML (it doe
     </a>
 </ul>
 
-### RSML Rojo
-A Rojo fork which converts `.rsml` files to Roblox instances in the DataModel.
-
 ::: warning
-The RSML Rojo fork currently uses an extremely outdated version of RSML and there is a lot of discrepencies between it and docs.
+The RSML Luau version currently uses a slightly outdated version of RSML (it does not have macros, oklab and oklch color spaces, skin color codes, or static attributes).
 :::
 
+
+- - -
+
+
+### RSML Rojo
+A Rojo fork which converts `.rsml` files to Roblox instances in the DataModel.
 <br></br>
 <ul style="list-style-type: none; padding: 0; margin: 0; margin-top: -5px; display: flex; gap: 20px; flex-wrap: wrap;">
-    <a href="/integrations/rojo" target="_blank">
-        <li style="display: flex; gap: 10px; justify-content: center;">
-            <img src="/logo.svg" width="20px" />
-            Documentation
-        </li>
-    </a>
     <a href="https://github.com/rbx-rsml/rojo" target="_blank">
         <li style="display: flex; gap: 10px; justify-content: center;">
             <img src="/github-dark.svg" width="20px" />
@@ -118,39 +116,18 @@ The RSML Rojo fork currently uses an extremely outdated version of RSML and ther
     </a>
 </ul>
 
-### RSML CLI
-A codegen CLI which converts `.rsml` files to `.luau` files in the local file system.
-
 ::: warning
-The RSML CLI is very barebones at the moment and only supports convering a .rsml file into a .luau file.
+The RSML Rojo fork currently uses an extremely outdated version of RSML which means there are a lot of discrepencies between it and the docs.
 :::
 
-<br></br>
-<ul style="list-style-type: none; padding: 0; margin: 0; margin-top: -5px; display: flex; gap: 20px; flex-wrap: wrap;">
-    <a href="/integrations/cli" target="_blank">
-        <li style="display: flex; gap: 10px; justify-content: center;">
-            <img src="/logo.svg" width="20px" />
-            Documentation
-        </li>
-    </a>
-    <a href="https://github.com/rbx-rsml/rsml-cli" target="_blank">
-        <li style="display: flex; gap: 10px; justify-content: center;">
-            <img src="/github-dark.svg" width="20px" />
-            Github Repo
-        </li>
-    </a>
-</ul>
+
+- - -
+
 
 ### RSML Rust
 A crate designed for lexing and parsing RSML.
 <br></br>
 <ul style="list-style-type: none; padding: 0; margin: 0; margin-top: -5px; display: flex; gap: 20px; flex-wrap: wrap;">
-    <a href="/integrations/rust" target="_blank">
-        <li style="display: flex; gap: 10px; justify-content: center;">
-            <img src="/logo.svg" width="20px" />
-            Documentation
-        </li>
-    </a>
     <a href="https://github.com/rbx-rsml/rsml-rust" target="_blank">
         <li style="display: flex; gap: 10px; justify-content: center;">
             <img src="/github-dark.svg" width="20px" />
@@ -164,6 +141,7 @@ A crate designed for lexing and parsing RSML.
         </li>
     </a>
 </ul>
+
 
 ## IDE Support
 

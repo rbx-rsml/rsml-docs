@@ -5,7 +5,7 @@
 - Rules which are defined later have a higher priority.
 - A Priority declaration allows you to explicitly define the priority for a rule.
 
-They can be written as follows:
+They are written as follows:
 
 ```rsml
 ... {

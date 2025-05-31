@@ -11,7 +11,6 @@
 		}
 	],
 	"repository": {
-
 		"data-types": {
 			"patterns": [
 				{
@@ -28,6 +27,9 @@
 				},
 				{
 					"include": "#enums"
+				},
+				{
+					"include": "#enum-shorthand"
 				},
 				{
 					"include": "#asset_urls"
@@ -50,13 +52,22 @@
 					"include": "#macros"
 				},
 				{
-					"include": "#declarations"
-				},
-				{
 					"include": "#data-types"
 				},
 				{
-					"include": "#variables"
+					"include": "#parameter"
+				},
+				{
+					"include": "#macro-call"
+				},
+				{
+					"include": "#declarations"
+				},
+				{
+					"include": "#static-attribute"
+				},
+				{
+					"include": "#attributes"
 				}
 			]
 		},
@@ -75,10 +86,50 @@
 		"scopes": {
 			"patterns": [
 				{
-					"include": "#scopes_no_selectors"
+					"include": "#macro-call"
+				},
+				{
+					"include": "#properties"
 				},
 				{
 					"include": "#selectors"
+				},
+				{
+					"include": "#scopes_no_selectors"
+				}
+			]
+		},
+
+		"assignment-no-dynamics": {
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#data-types"
+				},
+				{
+					"include": "#enum-shorthand"
+				},
+				{
+					"include": "#static-reference"
+				},
+				{
+					"include": "#macro-call"
+				},
+				{
+					"include": "#parameter"
+				}
+			]
+		},
+
+		"assignment": {
+			"patterns": [
+				{
+					"include": "#assignment-no-dynamics"
+				},
+				{
+					"include": "#attribute-reference"
 				}
 			]
 		},
@@ -101,76 +152,130 @@
 		"macros": {
 			"patterns": [
 				{
-					"begin": "(@macro)[ \t]*([a-zA-Z0-9]+)[ \t]*\\(",
+					"begin": "(@macro)[ \t]*([_a-zA-Z](-?[_a-zA-Z\\d])*)[ \t]*\\(",
 					"end": "\\)",
 					"beginCaptures": {
 						"1": {
 							"name": "keyword.control"
 						},
 						"2": {
-							"name": "entity.name.tag.css"
+							"name": "storage.type"
 						}
 					},
 					"patterns": [
 						{
-							"match": "((.+)[;,]?)+",
-							"include": "#macro-arg"
+							"include": "#parameter"
 						}
 					]
 				},
 				{
-					"match": "(@macro)[ \t]*([a-zA-Z0-9]+)",
+					"match": "(@macro)[ \t]*([_a-zA-Z](-?[_a-zA-Z\\d])*)",
 					"captures": {
 						"1": {
 							"name": "keyword.control"
 						},
 						"2": {
-							"name": "entity.name.tag.css"
+							"name": "storage.type"
 						}
 					}
 				}
 			]
 		},
-		"macro-arg": {
-			"match": "([a-zA-Z0-9]+)[\t ]*(?:\\:[\t ]*([a-zA-Z0-9]+)?)?[\t ]*(?:=[\t ]*(.+)[;,]?)?",
-			"captures": {
-				"1": {
-					"name": "variable.name"
-				},
-				"2": {
-					"name": "support.class"
-				},
-				"3": {
+
+		"macro-call": {
+			"patterns": [
+				{
+					"begin": "(([_a-zA-Z](-?[_a-zA-Z\\d])*)?!)[ \t]*\\(",
+					"end": "\\)",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.type"
+						}
+					},
 					"patterns": [
 						{
+							"include": "#enum-shorthand"
+						},
+						{
+							"include": "#tuples"
+						},
+						{
+							"include": "#macro-call"
+						},
+						{
+							"include": "#properties"
+						},
+						{
+							"include": "#selectors"
+						},
+						{
 							"include": "#data-types"
+						},
+						{
+							"include": "$self"
 						}
 					]
+				},
+				{
+					"match": "(([_a-zA-Z](-?[_a-zA-Z\\d])*)?!)",
+					"name": "storage.type"
 				}
-			}
+			]
+		},
+
+		"parameter": {
+			"match": "&(([_a-zA-Z](-?[_a-zA-Z\\d])*)?)",
+			"name": "storage.type"
 		},
 
 		"declarations": {
-			"begin": "(@(derive|priority|name))",
-			"end": ";|}|$",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.control"
-				}
-			},
-			
 			"patterns": [
 				{
-					"include": "#comments"
+					"begin": "(@(derive|priority|name|macro))",
+					"end": ";|}",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.control"
+						}
+					},
+					
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#data-types"
+						},
+						{
+							"include": "#enum-shorthand"
+						},
+						{
+							"include": "#static-reference"
+						},
+						{
+							"include": "#attribute-reference"
+						}
+					]
 				},
+
 				{
-					"include": "#data-types"
-				},
-				{
-					"include": "#enum-shorthand"
-				},
-				{
-					"include": "#variable-reference"
+					"patterns": [{
+						"match": "(@util)[ \t]([-_A-Za-z\\d\\[\\] \t]+)",
+						"captures": {
+							"1": {
+								"name": "keyword.control"
+							},
+							"2": {
+								"patterns": [ {
+									"match": "[^\\[\\]]+",
+									"name": "entity.name.tag.css"
+								}]
+							}
+						}
+					}, {
+						"match": "@(util)?",
+						"name": "keyword.control"
+					}]
 				}
 			]
 		},
@@ -178,30 +283,52 @@
 		"selectors": {
 			"patterns": [
 				{
-					"match": "(#|\\.|:|::)[a-zA-Z0-9]*",
+					"match": "(#|\\.|:|::)([_a-zA-Z](-?[_a-zA-Z\\d])*)?",
 					"name": "entity.name.tag.css"
 				},
 				{
-					"match": "[a-zA-Z0-9]+",
+					"match": "(([_a-zA-Z](-?[_a-zA-Z\\d])*))",
 					"name": "entity.name.tag.css"
 				}
 			]
 		},
 
 		"tuples": {
-			"begin": "([a-zA-Z0-9]+)?[ \t]*\\(",
-			"end": "\\)",
-			"beginCaptures": {
-				"1": {
-					"name": "support.class"
-				}
-			},
 			"patterns": [
 				{
-					"include": "#scopes_no_selectors"
-				},
-				{
-					"include": "#enum-shorthand"
+					"begin": "(!?)([a-zA-Z0-9]+)?[ \t]*\\(",
+					"end": "\\)",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.type"
+						},
+						"2": {
+							"name": "support.class"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#enum-shorthand"
+						},
+						{
+							"include": "#tuples"
+						},
+						{
+							"include": "#macro-call"
+						},
+						{
+							"include": "#properties"
+						},
+						{
+							"include": "#selectors"
+						},
+						{
+							"include": "#data-types"
+						},
+						{
+							"include": "$self"
+						}
+					]
 				}
 			]
 		},
@@ -241,7 +368,6 @@
             			}
 					]
 				},
-
 				
 				{
 					"name": "string",
@@ -315,8 +441,19 @@
 		"numbers": {
 			"patterns": [
 				{
+					"match": "(\\d[\\d_]*)?\\.((\\d[\\d_]*)(px|%)?)",
+					"captures": {
+						"1": {
+							"name": "constant.numeric"
+						},
+						"2": {
+							"name": "constant.numeric"
+						}
+					}
+				},
+				{
 					"name": "constant.numeric",
-					"match": "\\d+(px|%)?"
+					"match": "\\d[\\d_]*(px|%)?"
 				}
 			]
 		},
@@ -330,6 +467,10 @@
 				{
 					"name": "string",
 					"match": "(?i)(tw:(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)(:(950|900|800|700|600|500|400|300|200|100|50))?)"
+				},
+				{
+					"name": "string",
+					"match": "(?i)(skin:(rose|peach|gold|olive)(:(950|900|800|700|600|500|400|300|200|100|50))?)"
 				},
 				{
 					"name": "string",
@@ -355,9 +496,9 @@
 				}
 			]
 		},
-		
-		"variables": {
-			"begin": "(\\$([_a-zA-Z][_A-Za-z0-9]*)?)[ \t]*=?",
+
+		"attributes": {
+			"begin": "(\\$([_a-zA-Z](-?[_a-zA-Z\\d])*)?)([ \t]*)(=?)",
 			"end": ";|}|$",
 			"beginCaptures": {
 				"1": {
@@ -367,22 +508,33 @@
 			
 			"patterns": [
 				{
-					"include": "#comments"
-				},
-				{
-					"include": "#data-types"
-				},
-				{
-					"include": "#enum-shorthand"
-				},
-				{
-					"include": "#variable-reference"
+					"include": "#assignment"
 				}
 			]
 		},
-		"variable-reference": {
+		"attribute-reference": {
 			"match": "\\$([_a-zA-Z][_A-Za-z0-9]*)?",
 			"name": "variable.other.constant"
+		},
+
+		"static-attribute": {
+			"begin": "(\\$!([_a-zA-Z](-?[_a-zA-Z\\d])*)?)([ \t]*)(=?)",
+			"end": ";|}|$",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type"
+				}
+			},
+			
+			"patterns": [
+				{
+					"include": "#assignment-no-dynamics"
+				}
+			]
+		},
+		"static-reference": {
+			"match": "\\$!([_a-zA-Z][_A-Za-z0-9]*)?",
+			"name": "storage.type"
 		},
 
 		"enums": {
@@ -412,7 +564,7 @@
 		},
 
 		"properties": {
-			"begin": "([_a-zA-Z][_A-Za-z0-9]*)[ \t]*=",
+			"begin": "([_a-zA-Z](-?[_a-zA-Z\\d])*)([ \t]*)*=",
 			"end": ";|}|$",
 			"beginCaptures": {
 				"1": {
@@ -422,16 +574,7 @@
 			
 			"patterns": [
 				{
-					"include": "#comments"
-				},
-				{
-					"include": "#data-types"
-				},
-				{
-					"include": "#enum-shorthand"
-				},
-				{
-					"include": "#variable-reference"
+					"include": "#assignment"
 				}
 			]
 		}

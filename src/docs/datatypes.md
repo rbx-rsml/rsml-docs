@@ -14,12 +14,12 @@ The following operators can be used between datatypes: `^` (raise to power), `/`
 
 ## Tuples
 An anonymous tuple is a grouping of other data types. They are defined by wrapping a comma separated list in parenthesis:
-```rsml
+```rsml-types
 ("hello", "world")
 ```
 
 You can transform the datatype(s) within a tuple into one consolidated datatype via an annotation, for example.
-```rsml
+```rsml-types
 udim2 (50% + 25px, 13px + 12%)
 ```
 
@@ -27,11 +27,11 @@ If a tuple doesn't have an annotation or has an invalid annotation then the tupl
 
 
 ## Enums
-Enums can be written via `Enum.{name}.{item}` or `Enum:{name}:{item_name}`.
+Enums can be written via `Enum.{name}.{item_name}` or `Enum:{name}:{item_name}`.
 
 ### Enum Shorthands
-you are able to define solely the item name of the enum via `:{item_name}` when assigning a property or an attribute. The enum name will be inferred to be the name of the property or attribute. For example:
-```rsml
+When assigning a field you are able to only include the item name of the enum via the `:{item_name}` syntax. The enum name will be inferred to be the name of the field. For example:
+```rsml-types
 TextButton {
     -- Defining Enum's like this can be cumbersome.
     AutomaticSize = Enum.AutomaticSize.XY; 
@@ -41,8 +41,8 @@ TextButton {
 }
 ```
 
-Some annotated tuples may also for enum shorthands as well. For example:
-```rsml
+Some annotated tuples may also allow for enum shorthands as well. For example:
+```rsml-types
 FontFace = font ("BuilderSans", :SemiBold, :Italic);
 ```
 
@@ -59,15 +59,15 @@ To improve the developer experience, some property names are hardcoded to be inf
 Strings can be written via surrounding text in single or double quotes or double square brackets.
 
 ::: code-group
-```rsml [Single Quotes]
+```rsml-types [Single Quotes]
 SomeProperty = 'hello world'
 ```
 
-```rsml [Double Quotes]
+```rsml-types [Double Quotes]
 SomeProperty = "hello world"
 ```
 
-```rsml [Double Square Brackets]
+```rsml-types [Double Square Brackets]
 SomeProperty = [[
     hello world
 ]]
@@ -85,30 +85,30 @@ SomeProperty = [[
 
 ### Hex Colors
 You can easily add hex codes into your style sheets via a `#` prefix.
-```rsml
+```rsml-types
 #C586C0;
 ```
 
 ### Tailwind Colors
 [Tailwind colors](https://tailwindcss.com/docs/customizing-colors) can be written via the `tw:{name}:{shade?}` (case-insensitive) syntax which resolves to a Color3.
-```rsml
+```rsml-types
 tw:fuchsia:200;
 tw:fuchsia;
 ```
 
 ### Css Colors
 Css colors can be written via the `css:{name}` (case-insensitive) syntax which resolves to a Color3.
-```rsml
+```rsml-types
 css:rebeccapurple;
 ```
 
 ### Brick Colors
 You can write Brick Colors using the `bc:{name}` (case-insensitive) syntax which resolves to a Color3, or alternatively you can use the `brickcolor` annotated tuple which resolves to a BrickColor.
 
-```rsml
+```rsml-types
 bc:reallyred;
 ```
-```rsml
+```rsml-types
 brickcolor (
     name: string = "Medium stone grey"
 );
@@ -118,7 +118,7 @@ brickcolor ("Really red");
 
 ### RGB Colors
 Rgb colors can be written via the `rgb` annotated tuple.
-```rsml
+```rsml-types
 rgb (
     r: number = 0,
     g: number = r,
@@ -128,9 +128,36 @@ rgb (
 rgb (255, 82, 24);
 ```
 
+
+### OkLab & OkLch
+
+OkLab and OkLch are color spaces which provide more accurate and perceptually uniform color representation, making them better for accessibility and creating visually appealing designs.
+
+They are currently implemented as [intermediate data types](/docs/datatypes#intermediate-data-types) as Roblox doesn't natively support them. This means that they will turn into `Color3`'s when assigned to `Properties` or `Tokens`.
+
+```rsml
+oklab (
+    l: number,
+    a: number,
+    b: number
+);
+-- Example.
+oklab (0.7, 0.05, -0.09)
+```
+
+```rsml
+oklch (
+    l: number,
+    c: number,
+    h: number
+);
+-- Example.
+oklch (0.7, 0.1, 297)
+```
+
 ### Color3
 Color3's can be written via the `color3` annotated tuple.
-```rsml
+```rsml-types
 color3 (
     r: number = 0,
     g: number = r,
@@ -139,7 +166,7 @@ color3 (
 -- Example.
 color3 (.8, .1, .3);
 ```
-```rsml
+```rsml-types
 color3 (
     brickColor: BrickColor
 );
@@ -149,7 +176,7 @@ color3 (brickcolor ("Really red"));
 
 ## Content
 Content can be written via the `content` annotated tuple:
-```rsml
+```rsml-types
 content (rbxasset://1234567890)
 ```
 ​
@@ -158,7 +185,7 @@ content (rbxasset://1234567890)
 Below is documentation for annotated tuples which do not fit into the sub-sections above.
 
 ## UDim
-```rsml
+```rsml-types
 udim (
     scale: number = 0,
     offset: number = scale * 100
@@ -168,7 +195,7 @@ udim (.5, 25);
 ```
 
 ## UDim2
-```rsml
+```rsml-types
 udim2 (
     x: udim = UDim.new(0, 0),
     y: udim = x
@@ -176,7 +203,7 @@ udim2 (
 -- Example.
 udim2 (.5 + 100px, .1 + 25px);
 ```
-```rsml
+```rsml-types
 udim2 (
     xScale: number = 0,
     xOffset: number = xScale * 100,
@@ -188,7 +215,7 @@ udim2 (.5, 100, .1, 25);
 ```
 
 ## Rect
-```rsml
+```rsml-types
 rect (
     minX: number = 0,
     minY: number = minX,
@@ -198,7 +225,7 @@ rect (
 -- Example.
 rect (5, 10, 8, 12);
 ```
-```rsml
+```rsml-types
 rect (
     min: Vector2,
     max: Vector2
@@ -208,7 +235,7 @@ rect (vec2 (5, 10), vec2 (8, 12));
 ```
 
 ## Vector2
-```rsml
+```rsml-types
 vec2 (
     x: number = 0,
     y: number = x
@@ -218,7 +245,7 @@ vec2 (.5, .5);
 ```
 
 ## Vector2int16
-```rsml
+```rsml-types
 vec2i16 (
     x: number = 0,
     y: number = x
@@ -228,7 +255,7 @@ vec2i16 (2, 4);
 ```
 
 ## Vector3
-```rsml
+```rsml-types
 vec3 (
     x: number = 0,
     y: number = x,
@@ -239,7 +266,7 @@ vec3 (23.5782, 31.1299, 71);
 ```
 
 ## Vector3int16
-```rsml
+```rsml-types
 vec3i16 (
     x: number = 0,
     y: number = x,
@@ -250,7 +277,7 @@ vec3i16 (23, 31, 71);
 ```
 
 ## CFrame
-```rsml
+```rsml-types
 cframe (
     pos: Vector3 | Vector3int16 = Vector3.new(0, 0, 0),
     orienX: Vector3 | Vector3int16 = Vector3.new(0, 0, 0),,
@@ -260,7 +287,7 @@ cframe (
 -- Example.
 cframe (vec3 (5, 10, 15));
 ```
-```rsml
+```rsml-types
 cframe (
     posX: number = 0,
     posY: number = posX,
@@ -280,7 +307,7 @@ cframe (5, 10, 15);
 ```
 
 ## Font
-```rsml
+```rsml-types
 font (
     name: string | number = "SourceSansPro",
     weight: Enum.FontWeight | string | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 = Enum.FontWeight.Regular,
@@ -291,7 +318,7 @@ font ("BuilderSans", :SemiBold, "Italic")
 ```
 
 ## ColorSequence
-```rsml
+```rsml-types
 colorseq (
     ...: (time: number | nil, color: Color3) | Color3
 )
@@ -304,7 +331,7 @@ colorseq (
 ```
 
 ## NumberSequence
-```rsml
+```rsml-types
 numseq (
     ...: (time: number | nil, value: number, envelope: number | nil) | number
 )
@@ -317,7 +344,7 @@ numseq (
 ```
 
 ## NumberRange
-```rsml
+```rsml-types
 numrange (
     min: number,
     max: number

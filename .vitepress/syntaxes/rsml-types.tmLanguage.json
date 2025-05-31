@@ -1,0 +1,13 @@
+{
+    "scopeName": "rsml.types",
+	"name": "rsml-types",
+    "patterns": [
+		{
+            "include": "source.rsml#comments"
+        },
+        {
+            "include": "source.rsml#data-types"
+        }
+    ]
+}
+  

@@ -12,32 +12,28 @@ export default defineConfig({
 
     markdown: {
         languages: [
-            {   
-                ...JSON.parse(fs.readFileSync('./syntaxes/rsml.tmLanguage.json', 'utf8'))
-            },
+            JSON.parse(fs.readFileSync('./.vitepress/syntaxes/rsml.tmLanguage.json', 'utf8')),
 
-            {
-                ...JSON.parse(fs.readFileSync('./syntaxes/luau.tmLanguage.json', 'utf8'))
-            },
+            JSON.parse(fs.readFileSync('./.vitepress/syntaxes/rsml-types.tmLanguage.json', 'utf8')),
+
+            JSON.parse(fs.readFileSync('./.vitepress/syntaxes/luau.tmLanguage.json', 'utf8')),
 
             {
                 injectTo: ["source.luau"],
                 embeddedLanguages: {
                     ["meta.embedded.rsml"]: "rsml"
                 },
-                ...JSON.parse(fs.readFileSync('./syntaxes/rsml-luau.tmLanguage.json', 'utf8'))
+                ...JSON.parse(fs.readFileSync('./.vitepress/syntaxes/rsml-luau.tmLanguage.json', 'utf8'))
             },
 
-            {
-                ...JSON.parse(fs.readFileSync('./syntaxes/ts.tmLanguage.json', 'utf8'))
-            },
+            JSON.parse(fs.readFileSync('./.vitepress/syntaxes/ts.tmLanguage.json', 'utf8')),
 
             {   
                 injectTo: ["source.ts"],
                 embeddedLanguages: {
                     ["meta.embedded.rsml"]: "rsml"
                 },
-                ...JSON.parse(fs.readFileSync('./syntaxes/rsml-ts.tmLanguage.json', 'utf8'))
+                ...JSON.parse(fs.readFileSync('./.vitepress/syntaxes/rsml-ts.tmLanguage.json', 'utf8'))
             }
         ],
         theme: {
@@ -72,7 +68,7 @@ export default defineConfig({
                 },
 
                 {
-                    "scope": ["support.class"],
+                    "scope": ["support.class", "entity.name.type.enum"],
                     "settings": {
                         "foreground": "#4EC9B0"
                     }
@@ -108,7 +104,7 @@ export default defineConfig({
                 },
 
                 {
-                    "scope": ["storage.modifier", "constant.language"],
+                    "scope": ["storage.modifier", "constant.language", "storage.type"],
                     "settings": {
                         "foreground": "#4191CB"
                     }
@@ -132,12 +128,13 @@ export default defineConfig({
             {
                 text: "Docs",
                 items: [
+                    { text: "Selectors", link: "docs/selectors" },
+                    { text: "Fields", link: "docs/fields" },
                     { text: "Derives", link: "docs/derives" },
                     { text: "Names", link: "docs/names" },
                     { text: "Priorities", link: "docs/priorities" },
-                    { text: "Selectors", link: "docs/selectors" },
-                    { text: "Fields", link: "docs/fields" },
                     { text: "Datatypes", link: "docs/datatypes" },
+                    { text: "Macros", link: "docs/macros" },
                     { text: "Comments", link: "docs/comments" },
                 ]
             }
