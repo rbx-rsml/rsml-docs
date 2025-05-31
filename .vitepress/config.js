@@ -134,7 +134,7 @@ export default defineConfig({
                     { text: "Derives", link: "docs/derives" },
                     { text: "Names", link: "docs/names" },
                     { text: "Priorities", link: "docs/priorities" },
-                    { text: "Data Types", link: "docs/data-types" },
+                    { text: "Data Types", link: "docs/datatypes" },
                     { text: "Macros", link: "docs/macros" },
                     { text: "Comments", link: "docs/comments" },
                 ]
