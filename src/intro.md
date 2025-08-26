@@ -54,7 +54,7 @@ $ColorDestructive = tw:rose:700;
 A codegen CLI which converts `.rsml` files to `.model.json` files in the local file system.
 <br></br>
 <ul style="list-style-type: none; padding: 0; margin: 0; margin-top: -5px; display: flex; gap: 20px; flex-wrap: wrap;">
-    <a href="https://github.com/rbx-rsml/rsml-cli/releases/tag/v0.0.0" target="_blank">
+    <a href="https://github.com/rbx-rsml/rsml-cli/releases/latest" target="_blank">
         <li style="display: flex; gap: 10px; justify-content: center;">
             <img src="/logo.svg" width="20px" />
             Documentation
