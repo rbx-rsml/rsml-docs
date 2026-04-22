@@ -12,19 +12,39 @@ They can be defined via the macro declaration:
 Macros can be given arguments which can be referenced via a `&` prefix
 ```rsml
 @macro MyCoolMacro (&size) {
-    Size = &size,
-    Position = udim2 (.5, .5),
+    Size = &size;
+    Position = udim2 (.5, .5);
+}
+```
+
+
+## Return Context
+
+By default macro's must return fully qualified expression(s) or block(s). But they can be customized to return a selector or a datatype by defining a return context.
+
+| Name | Context |
+| ---- | ------- |
+| Construct | Must return a fully qualified expression(s) or block(s). |
+| Datatype | Must return a datatype. |
+| Selector | Must return a selector. |
+
+```rsml
+@macro MyCoolMacro (&arg) -> Datatype {
+    rgb (35, 24, 31)
+}
+
+@macro MyCoolMacro (&arg) -> Selector {
+    ::TextButton
 }
 ```
 
 
 ## Calling Macros
-A macro can be called by referencing its name with a `!` suffix.
+A macro can be called by referencing its name with a `!` suffix. All arguments of a macro must be datatypes.
 
 ```rsml
 MyCoolMacro! (udim2 (500px))
 ```
-
 
 ## Overloading
 You can define multiple macros with the same name but with a different amount of parameters.

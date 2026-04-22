@@ -9,9 +9,7 @@ Selectors are used to define which instances a rule is responsible for styling:
 | Tag Selector | `.` | Styles instances which have a specific tag. |
 | State Selector | `:` | Styles instances which have a specific state active (e.g. hover). |
 | Pseudo Selector | `::` | Creates a new instance of a specific class. |
-
-
-
+| Query Selector | `@` | Styles instances only while a StyleQuery instance or pseudo‑instance with the same name is active. |
 
 
 ## Examples
@@ -21,10 +19,8 @@ TextButton {}
 .MyTag {}
 :hover {}
 ::UIPadding {}
+@MyQuery {}
 ```
-
-
-
 
 
 ## Unnecessary Nesting
@@ -45,10 +41,6 @@ TextButton {
 }
 ```
 :::
-
-
-
-
 
 
 ## Multiple Selectors
